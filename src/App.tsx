@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
 import Card from "./Card";
 import "./App.css";
+import {useEffect, useState} from "react";
 
 type Pokemon = {
     name: string;
     type: string;
+    image?: string;
 };
 
 const BASE = "https://pokeapi.co/api/v2/";
@@ -24,6 +25,7 @@ function App() {
                     return {
                         name: p.name,
                         type: details.types[0]?.type.name || "unknown",
+                        image: details.sprites.front_default,
                     };
                 })
             );
@@ -40,10 +42,10 @@ function App() {
 
     return (
         <>
-            <h1>Pokemony</h1>
+            <h1>Pokedex</h1>
             <div>
                 {pokemons.map((p) => (
-                    <Card key={p.name} pokemon={p.name} type={p.type} />
+                    <Card key={p.name} pokemon={p.name} type={p.type} image={p.image} />
                 ))}
             </div>
         </>
